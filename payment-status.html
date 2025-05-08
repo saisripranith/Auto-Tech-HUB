@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Status - Auto Tech-HUB</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #00c6ff;
+      --secondary-color: #2c5364;
+      --dark-bg: #1f1f1f;
+      --light-text: #ffffff;
+      --gray-text: #aaaaaa;
+      --success-color: #4CAF50;
+      --warning-color: #FFC107;
+      --danger-color: #F44336;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f6f9;
+      color: #333;
+    }
+
+    .navbar {
+      background: var(--dark-bg);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--primary-color);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--light-text);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-color);
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-toggle {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      background: white;
+      min-width: 200px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      padding: 10px 0;
+      z-index: 1000;
+      top: 100%;
+      left: 0;
+    }
+
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 10px 20px;
+      color: #333;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .dropdown-menu a:hover {
+      background: #f5f5f5;
+      color: var(--primary-color);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .dashboard-title {
+      font-size: 1.8rem;
+      color: var(--dark-bg);
+    }
+
+    .filter-controls {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .filter-controls select {
+      padding: 0.5rem;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .payment-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .payment-card {
+      background: white;
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .payment-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #eee;
+    }
+
+    .order-id {
+      font-weight: bold;
+      color: var(--dark-bg);
+    }
+
+    .payment-status {
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .status-paid {
+      background: #D4EDDA;
+      color: #155724;
+    }
+
+    .status-pending {
+      background: #FFF3CD;
+      color: #856404;
+    }
+
+    .status-refunded {
+      background: #F8D7DA;
+      color: #721C24;
+    }
+
+    .status-failed {
+      background: #F8D7DA;
+      color: #721C24;
+    }
+
+    .payment-details {
+      margin-bottom: 1rem;
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .detail-label {
+      color: var(--gray-text);
+    }
+
+    .detail-value {
+      font-weight: 500;
+    }
+
+    .payment-amount {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: var(--primary-color);
+      margin: 1rem 0;
+    }
+
+    .payment-method {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .payment-method i {
+      font-size: 1.2rem;
+      color: var(--primary-color);
+    }
+
+    .refund-section {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid #eee;
+    }
+
+    .refund-status {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .refund-status i {
+      color: var(--success-color);
+    }
+
+    .refund-amount {
+      color: var(--success-color);
+      font-weight: bold;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .action-btn {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .request-refund-btn {
+      background: var(--warning-color);
+      color: white;
+    }
+
+    .contact-support-btn {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .action-btn:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">Auto Tech-HUB</div>
+    <div class="nav-links">
+      <a href="home.html">Home</a>
+      <a href="products.html">Products</a>
+      <div class="dropdown">
+        <a href="#" class="dropdown-toggle">Services <i class="fas fa-chevron-down"></i></a>
+        <div class="dropdown-menu">
+          <a href="my-orders.html">My Orders</a>
+          <a href="delivery-status.html">Delivery Status & Location</a>
+          <a href="payment-status.html">Payment & Refund Status</a>
+          <a href="mechanic-booking.html">Mechanic Booking Status</a>
+          <a href="mechanic-location.html">Mechanic Location</a>
+        </div>
+      </div>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="user-actions">
+      <a href="cart.html" class="cart-icon">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count">0</span>
+      </a>
+      <a href="autotechhub.html" class="login-btn">Login</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="dashboard-header">
+      <h1 class="dashboard-title">Payment & Refund Status</h1>
+      <div class="filter-controls">
+        <select id="status-filter">
+          <option value="all">All Status</option>
+          <option value="paid">Paid</option>
+          <option value="pending">Pending</option>
+          <option value="refunded">Refunded</option>
+          <option value="failed">Failed</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="payment-grid" id="payments-container">
+    </div>
+  </div>
+
+  <script>
+    const payments = [
+      {
+        id: "PAY-001",
+        orderId: "ORD-001",
+        amount: 6198,
+        status: "paid",
+        method: "credit_card",
+        date: "2024-03-20",
+        items: [
+          {
+            name: "Premium Engine Oil Filter",
+            price: 1599
+          },
+          {
+            name: "Brake Pads Set",
+            price: 4599
+          }
+        ],
+        refund: null
+      },
+      {
+        id: "PAY-002",
+        orderId: "ORD-002",
+        amount: 1299,
+        status: "refunded",
+        method: "paypal",
+        date: "2024-03-19",
+        items: [
+          {
+            name: "Air Filter",
+            price: 1299
+          }
+        ],
+        refund: {
+          amount: 1299,
+          date: "2024-03-20",
+          reason: "Product not needed"
+        }
+      }
+    ];
+
+    function renderPayments(payments) {
+      const container = document.getElementById('payments-container');
+      container.innerHTML = '';
+
+      payments.forEach(payment => {
+        const paymentCard = document.createElement('div');
+        paymentCard.className = 'payment-card';
+        
+        let statusClass = '';
+        let statusText = '';
+        switch(payment.status) {
+          case 'paid':
+            statusClass = 'status-paid';
+            statusText = 'Paid';
+            break;
+          case 'pending':
+            statusClass = 'status-pending';
+            statusText = 'Pending';
+            break;
+          case 'refunded':
+            statusClass = 'status-refunded';
+            statusText = 'Refunded';
+            break;
+          case 'failed':
+            statusClass = 'status-failed';
+            statusText = 'Failed';
+            break;
+        }
+
+        let methodIcon = '';
+        let methodText = '';
+        switch(payment.method) {
+          case 'credit_card':
+            methodIcon = 'fa-credit-card';
+            methodText = 'Credit Card';
+            break;
+          case 'paypal':
+            methodIcon = 'fa-paypal';
+            methodText = 'PayPal';
+            break;
+        }
+
+        paymentCard.innerHTML = `
+          <div class="payment-header">
+            <div class="order-id">Order #${payment.orderId}</div>
+            <div class="payment-status ${statusClass}">${statusText}</div>
+          </div>
+          <div class="payment-details">
+            <div class="detail-row">
+              <div class="detail-label">Payment ID</div>
+              <div class="detail-value">${payment.id}</div>
+            </div>
+            <div class="detail-row">
+              <div class="detail-label">Date</div>
+              <div class="detail-value">${payment.date}</div>
+            </div>
+            <div class="payment-method">
+              <i class="fab ${methodIcon}"></i>
+              <span>${methodText}</span>
+            </div>
+            <div class="payment-amount">₹${payment.amount.toFixed(2)}</div>
+          </div>
+          ${payment.refund ? `
+            <div class="refund-section">
+              <div class="refund-status">
+                <i class="fas fa-check-circle"></i>
+                <span>Refund Processed</span>
+              </div>
+              <div class="detail-row">
+                <div class="detail-label">Refund Amount</div>
+                <div class="refund-amount">₹${payment.refund.amount.toFixed(2)}</div>
+              </div>
+              <div class="detail-row">
+                <div class="detail-label">Refund Date</div>
+                <div class="detail-value">${payment.refund.date}</div>
+              </div>
+              <div class="detail-row">
+                <div class="detail-label">Reason</div>
+                <div class="detail-value">${payment.refund.reason}</div>
+              </div>
+            </div>
+          ` : ''}
+          <div class="action-buttons">
+            ${payment.status === 'paid' ? '<button class="action-btn request-refund-btn">Request Refund</button>' : ''}
+            <button class="action-btn contact-support-btn">Contact Support</button>
+          </div>
+        `;
+
+        container.appendChild(paymentCard);
+      });
+    }
+
+    renderPayments(payments);
+
+    document.getElementById('status-filter').addEventListener('change', function() {
+      const status = this.value;
+      const filteredPayments = status === 'all' 
+        ? payments 
+        : payments.filter(payment => payment.status === status);
+      renderPayments(filteredPayments);
+    });
+  </script>
+</body>
+</html> 

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Service - Auto Tech-HUB</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #00c6ff;
+      --secondary-color: #2c5364;
+      --dark-bg: #1f1f1f;
+      --light-text: #ffffff;
+      --gray-text: #aaaaaa;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: var(--light-text);
+      overflow-x: hidden;
+    }
+
+    .navbar {
+      background-color: var(--dark-bg);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: var(--light-text);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-color);
+    }
+
+    .service-container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .service-form {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 2rem;
+      border-radius: 10px;
+    }
+
+    .service-form h2 {
+      margin-bottom: 1.5rem;
+      color: var(--primary-color);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.8rem;
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 5px;
+      color: var(--light-text);
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary-color);
+    }
+
+    .map-container {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 2rem;
+      border-radius: 10px;
+      height: 500px;
+    }
+
+    #map {
+      width: 100%;
+      height: 100%;
+      border-radius: 5px;
+    }
+
+    .btn {
+      padding: 1rem 2rem;
+      background-color: var(--primary-color);
+      color: var(--light-text);
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      width: 100%;
+    }
+
+    .btn:hover {
+      transform: scale(1.02);
+    }
+
+    footer {
+      background-color: var(--dark-bg);
+      padding: 2rem;
+      text-align: center;
+      margin-top: 4rem;
+    }
+
+    .social-links {
+      margin-top: 1rem;
+    }
+
+    .social-links a {
+      color: var(--light-text);
+      margin: 0 1rem;
+      font-size: 1.5rem;
+      transition: color 0.3s ease;
+    }
+
+    .social-links a:hover {
+      color: var(--primary-color);
+    }
+
+    @media (max-width: 768px) {
+      .service-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="home.html" class="logo">Auto Tech-HUB</a>
+    <div class="nav-links">
+      <a href="home.html#products">Products</a>
+      <a href="home-service.html">Services</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <div class="service-container">
+    <div class="service-form">
+      <h2>Schedule Home Service</h2>
+      <form id="serviceForm">
+        <div class="form-group">
+          <label for="vehicleType">Vehicle Type</label>
+          <select id="vehicleType" required>
+            <option value="">Select Vehicle Type</option>
+            <option value="car">Car</option>
+            <option value="suv">SUV</option>
+            <option value="truck">Truck</option>
+            <option value="motorcycle">Motorcycle</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="vehicleMake">Vehicle Make</label>
+          <input type="text" id="vehicleMake" placeholder="e.g., Toyota, Honda" required>
+        </div>
+
+        <div class="form-group">
+          <label for="vehicleModel">Vehicle Model</label>
+          <input type="text" id="vehicleModel" placeholder="e.g., Camry, Civic" required>
+        </div>
+
+        <div class="form-group">
+          <label for="vehicleYear">Vehicle Year</label>
+          <input type="number" id="vehicleYear" min="1900" max="2024" required>
+        </div>
+
+        <div class="form-group">
+          <label for="problemDescription">Problem Description</label>
+          <textarea id="problemDescription" rows="4" placeholder="Describe the issue with your vehicle..." required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="serviceDate">Preferred Service Date</label>
+          <input type="date" id="serviceDate" required>
+        </div>
+
+        <div class="form-group">
+          <label for="serviceTime">Preferred Service Time</label>
+          <input type="time" id="serviceTime" required>
+        </div>
+
+        <div class="form-group">
+          <label for="address">Your Address</label>
+          <input type="text" id="address" placeholder="Enter your address" required>
+        </div>
+
+        <button type="submit" class="btn">Schedule Service</button>
+      </form>
+    </div>
+
+    <div class="map-container">
+      <h2>Your Location</h2>
+      <div id="map"></div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2024 Auto Tech-HUB. All rights reserved.</p>
+    <div class="social-links">
+      <a href="#"><i class="fab fa-facebook"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+    </div>
+  </footer>
+
+  <script>
+    function initMap() {
+      const map = new google.maps.Map(document.getElementById('map'), {
+        center: { lat: 0, lng: 0 },
+        zoom: 15
+      });
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const userLocation = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+            
+            map.setCenter(userLocation);
+            
+            new google.maps.Marker({
+              position: userLocation,
+              map: map,
+              title: 'Your Location'
+            });
+          },
+          (error) => {
+            console.error('Error getting location:', error);
+          }
+        );
+      }
+    }
+
+    document.getElementById('serviceForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const formData = {
+        vehicleType: document.getElementById('vehicleType').value,
+        vehicleMake: document.getElementById('vehicleMake').value,
+        vehicleModel: document.getElementById('vehicleModel').value,
+        vehicleYear: document.getElementById('vehicleYear').value,
+        problemDescription: document.getElementById('problemDescription').value,
+        serviceDate: document.getElementById('serviceDate').value,
+        serviceTime: document.getElementById('serviceTime').value,
+        address: document.getElementById('address').value
+      };
+
+      const serviceRequests = JSON.parse(localStorage.getItem('serviceRequests')) || [];
+      serviceRequests.push(formData);
+      localStorage.setItem('serviceRequests', JSON.stringify(serviceRequests));
+
+      alert('Service request submitted successfully! We will contact you shortly.');
+      window.location.href = 'home.html';
+    });
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOVYRIgupAurZup5y1PRh8Ismb1A3lLao&callback=initMap" async defer></script>
+</body>
+</html> 

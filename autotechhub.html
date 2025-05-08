@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Auto Tech-HUB Login</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #00c6ff;
+      --secondary-color: #2c5364;
+      --dark-bg: #1f1f1f;
+      --light-text: #ffffff;
+      --gray-text: #aaaaaa;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5));
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 450px;
+      padding: 40px;
+      text-align: center;
+      animation: fadeIn 0.5s ease-out;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .logo {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: var(--primary-color);
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      color: var(--light-text);
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+
+    .tab-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 30px;
+    }
+
+    .tab-buttons button {
+      padding: 12px 25px;
+      border: none;
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--light-text);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: bold;
+      border-radius: 10px;
+      font-size: 1rem;
+    }
+
+    .tab-buttons button:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .tab-buttons button.active {
+      background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+      color: var(--light-text);
+      box-shadow: 0 5px 15px rgba(0, 198, 255, 0.3);
+    }
+
+    form {
+      display: none;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    form.active {
+      display: flex;
+    }
+
+    .form-group {
+      position: relative;
+    }
+
+    .form-group i {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gray-text);
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 15px 15px 15px 45px;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      outline: none;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--light-text);
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 10px rgba(0, 198, 255, 0.3);
+    }
+
+    input[type="text"]::placeholder,
+    input[type="password"]::placeholder {
+      color: var(--gray-text);
+    }
+
+    button[type="submit"] {
+      background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+      color: var(--light-text);
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+    }
+
+    button[type="submit"]:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 198, 255, 0.4);
+    }
+
+    .links {
+      margin-top: 20px;
+      font-size: 0.9rem;
+      color: var(--gray-text);
+    }
+
+    .links a {
+      color: var(--primary-color);
+      text-decoration: none;
+      transition: color 0.3s ease;
+      margin: 0 10px;
+    }
+
+    .links a:hover {
+      color: #00a8ff;
+    }
+
+    .footer {
+      margin-top: 30px;
+      font-size: 0.8rem;
+      color: var(--gray-text);
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        margin: 20px;
+        padding: 30px;
+      }
+
+      .logo {
+        font-size: 2rem;
+      }
+
+      .tab-buttons button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">Auto Tech-HUB</div>
+    <div class="subtitle">Affordable Spare Parts for Cars & Motorcycles</div>
+
+    <div class="tab-buttons">
+      <button class="tab-btn active" onclick="switchForm('user')">User Login</button>
+      <button class="tab-btn" onclick="switchForm('admin')">Admin Login</button>
+    </div>
+
+    <!-- User Login Form -->
+    <form id="user-form" class="active">
+      <div class="form-group">
+        <i class="fas fa-envelope"></i>
+        <input type="text" placeholder="User Email" required />
+      </div>
+      <div class="form-group">
+        <i class="fas fa-lock"></i>
+        <input type="password" placeholder="Password" required />
+      </div>
+      <button type="submit">Login as User</button>
+      <div class="links">
+        <a href="#">Forgot Password?</a> | <a href="register.html">Register</a>
+      </div>
+    </form>
+
+    <!-- Admin Login Form -->
+    <form id="admin-form">
+      <div class="form-group">
+        <i class="fas fa-user-shield"></i>
+        <input type="text" placeholder="Admin Username" required />
+      </div>
+      <div class="form-group">
+        <i class="fas fa-lock"></i>
+        <input type="password" placeholder="Admin Password" required />
+      </div>
+      <button type="submit">Login as Admin</button>
+      <div class="links">
+        <a href="#">Forgot Password?</a>
+      </div>
+    </form>
+
+    <div class="footer">© 2025 Auto Tech-HUB. All rights reserved.</div>
+  </div>
+  <script>
+    function switchForm(role) {
+      const userForm = document.getElementById("user-form");
+      const adminForm = document.getElementById("admin-form");
+      const buttons = document.querySelectorAll(".tab-btn");
+  
+      buttons.forEach(btn => btn.classList.remove("active"));
+      document.querySelector(`.tab-btn[onclick*="${role}"]`).classList.add("active");
+  
+      if (role === "user") {
+        userForm.classList.add("active");
+        adminForm.classList.remove("active");
+      } else {
+        adminForm.classList.add("active");
+        userForm.classList.remove("active");
+      }
+    }
+  
+    document.getElementById("user-form").addEventListener("submit", function(e) {
+      e.preventDefault();
+  
+      const email = this.querySelector("input[type='text']").value.trim();
+      const password = this.querySelector("input[type='password']").value.trim();
+      const users = JSON.parse(localStorage.getItem("users")) || [];
+  
+      const matchedUser = users.find(user =>
+        user.email.toLowerCase() === email.toLowerCase() && user.password === password
+      );
+  
+      if (matchedUser) {
+        localStorage.setItem("loggedInUser", email);
+        window.location.href = "home.html";
+      } else {
+        alert("Invalid email or password. Please try again.");
+      }
+    });
+
+    document.getElementById("admin-form").addEventListener("submit", function(e) {
+      e.preventDefault();
+  
+      const username = this.querySelector("input[type='text']").value.trim();
+      const password = this.querySelector("input[type='password']").value.trim();
+  
+      // Updated admin credentials
+      if (username === "saisripranith" && password === "15882890") {
+        localStorage.setItem("loggedInUser", "admin");
+        window.location.href = "admin-dashboard.html";
+      } else {
+        alert("Invalid admin credentials. Please try again.");
+      }
+    });
+  </script>
+</body>
+</html>
+  

@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mechanic Booking Status - Auto Tech-HUB</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #00c6ff;
+      --secondary-color: #2c5364;
+      --dark-bg: #1f1f1f;
+      --light-text: #ffffff;
+      --gray-text: #aaaaaa;
+      --success-color: #4CAF50;
+      --warning-color: #FFC107;
+      --danger-color: #F44336;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f6f9;
+      color: #333;
+    }
+
+    .navbar {
+      background: var(--dark-bg);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--primary-color);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--light-text);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-color);
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-toggle {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      background: white;
+      min-width: 200px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      padding: 10px 0;
+      z-index: 1000;
+      top: 100%;
+      left: 0;
+    }
+
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 10px 20px;
+      color: #333;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .dropdown-menu a:hover {
+      background: #f5f5f5;
+      color: var(--primary-color);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .dashboard-title {
+      font-size: 1.8rem;
+      color: var(--dark-bg);
+    }
+
+    .filter-controls {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .filter-controls select {
+      padding: 0.5rem;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .bookings-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .booking-card {
+      background: white;
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .booking-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #eee;
+    }
+
+    .booking-id {
+      font-weight: bold;
+      color: var(--dark-bg);
+    }
+
+    .booking-status {
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .status-pending {
+      background: #FFF3CD;
+      color: #856404;
+    }
+
+    .status-confirmed {
+      background: #D4EDDA;
+      color: #155724;
+    }
+
+    .status-in-progress {
+      background: #CCE5FF;
+      color: #004085;
+    }
+
+    .status-completed {
+      background: #D4EDDA;
+      color: #155724;
+    }
+
+    .status-cancelled {
+      background: #F8D7DA;
+      color: #721C24;
+    }
+
+    .booking-details {
+      margin-bottom: 1rem;
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .detail-label {
+      color: var(--gray-text);
+    }
+
+    .detail-value {
+      font-weight: 500;
+    }
+
+    .mechanic-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 1rem 0;
+      padding: 1rem;
+      background: #f8f9fa;
+      border-radius: 5px;
+    }
+
+    .mechanic-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--primary-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.2rem;
+    }
+
+    .mechanic-details {
+      flex: 1;
+    }
+
+    .mechanic-name {
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+    }
+
+    .mechanic-rating {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      color: var(--warning-color);
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .action-btn {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .track-btn {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .cancel-btn {
+      background: var(--danger-color);
+      color: white;
+    }
+
+    .reschedule-btn {
+      background: var(--warning-color);
+      color: white;
+    }
+
+    .action-btn:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+
+    .service-details {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid #eee;
+    }
+
+    .service-type {
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .service-description {
+      color: var(--gray-text);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">Auto Tech-HUB</div>
+    <div class="nav-links">
+      <a href="home.html">Home</a>
+      <a href="products.html">Products</a>
+      <div class="dropdown">
+        <a href="#" class="dropdown-toggle">Services <i class="fas fa-chevron-down"></i></a>
+        <div class="dropdown-menu">
+          <a href="my-orders.html">My Orders</a>
+          <a href="delivery-status.html">Delivery Status & Location</a>
+          <a href="payment-status.html">Payment & Refund Status</a>
+          <a href="mechanic-booking.html">Mechanic Booking Status</a>
+          <a href="mechanic-location.html">Mechanic Location</a>
+        </div>
+      </div>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="user-actions">
+      <a href="cart.html" class="cart-icon">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count">0</span>
+      </a>
+      <a href="autotechhub.html" class="login-btn">Login</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="dashboard-header">
+      <h1 class="dashboard-title">Mechanic Booking Status</h1>
+      <div class="filter-controls">
+        <select id="status-filter">
+          <option value="all">All Status</option>
+          <option value="pending">Pending</option>
+          <option value="confirmed">Confirmed</option>
+          <option value="in-progress">In Progress</option>
+          <option value="completed">Completed</option>
+          <option value="cancelled">Cancelled</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="bookings-grid" id="bookings-container">
+    </div>
+  </div>
+
+  <script>
+    const bookings = [
+      {
+        id: "BK-001",
+        status: "confirmed",
+        date: "2024-03-20",
+        time: "10:00 AM",
+        mechanic: {
+          name: "John Smith",
+          rating: 4.8,
+          avatar: "JS"
+        },
+        service: {
+          type: "Oil Change",
+          description: "Complete oil change service with filter replacement"
+        },
+        location: "123 Main St, City",
+        price: 49.99
+      },
+      {
+        id: "BK-002",
+        status: "in-progress",
+        date: "2024-03-20",
+        time: "2:30 PM",
+        mechanic: {
+          name: "Mike Johnson",
+          rating: 4.9,
+          avatar: "MJ"
+        },
+        service: {
+          type: "Brake Service",
+          description: "Brake pad replacement and inspection"
+        },
+        location: "456 Oak Ave, City",
+        price: 89.99
+      }
+    ];
+
+    function renderBookings(bookings) {
+      const container = document.getElementById('bookings-container');
+      container.innerHTML = '';
+
+      bookings.forEach(booking => {
+        const bookingCard = document.createElement('div');
+        bookingCard.className = 'booking-card';
+        
+        let statusClass = '';
+        let statusText = '';
+        switch(booking.status) {
+          case 'pending':
+            statusClass = 'status-pending';
+            statusText = 'Pending';
+            break;
+          case 'confirmed':
+            statusClass = 'status-confirmed';
+            statusText = 'Confirmed';
+            break;
+          case 'in-progress':
+            statusClass = 'status-in-progress';
+            statusText = 'In Progress';
+            break;
+          case 'completed':
+            statusClass = 'status-completed';
+            statusText = 'Completed';
+            break;
+          case 'cancelled':
+            statusClass = 'status-cancelled';
+            statusText = 'Cancelled';
+            break;
+        }
+
+        bookingCard.innerHTML = `
+          <div class="booking-header">
+            <div class="booking-id">Booking #${booking.id}</div>
+            <div class="booking-status ${statusClass}">${statusText}</div>
+          </div>
+          <div class="booking-details">
+            <div class="detail-row">
+              <div class="detail-label">Date & Time</div>
+              <div class="detail-value">${booking.date} at ${booking.time}</div>
+            </div>
+            <div class="detail-row">
+              <div class="detail-label">Location</div>
+              <div class="detail-value">${booking.location}</div>
+            </div>
+            <div class="detail-row">
+              <div class="detail-label">Price</div>
+              <div class="detail-value">$${booking.price.toFixed(2)}</div>
+            </div>
+          </div>
+          <div class="mechanic-info">
+            <div class="mechanic-avatar">${booking.mechanic.avatar}</div>
+            <div class="mechanic-details">
+              <div class="mechanic-name">${booking.mechanic.name}</div>
+              <div class="mechanic-rating">
+                <i class="fas fa-star"></i>
+                <span>${booking.mechanic.rating}</span>
+              </div>
+            </div>
+          </div>
+          <div class="service-details">
+            <div class="service-type">${booking.service.type}</div>
+            <div class="service-description">${booking.service.description}</div>
+          </div>
+          <div class="action-buttons">
+            <button class="action-btn track-btn">Track Mechanic</button>
+            ${booking.status === 'pending' || booking.status === 'confirmed' ? `
+              <button class="action-btn reschedule-btn">Reschedule</button>
+              <button class="action-btn cancel-btn">Cancel</button>
+            ` : ''}
+          </div>
+        `;
+
+        container.appendChild(bookingCard);
+      });
+    }
+
+    renderBookings(bookings);
+
+    document.getElementById('status-filter').addEventListener('change', function() {
+      const status = this.value;
+      const filteredBookings = status === 'all' 
+        ? bookings 
+        : bookings.filter(booking => booking.status === status);
+      renderBookings(filteredBookings);
+    });
+  </script>
+</body>
+</html> 

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Air Filter - Auto Tech-HUB</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #00c6ff;
+      --secondary-color: #2c5364;
+      --dark-bg: #1f1f1f;
+      --light-text: #ffffff;
+      --gray-text: #aaaaaa;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: var(--light-text);
+      overflow-x: hidden;
+    }
+
+    .navbar {
+      background-color: var(--dark-bg);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: var(--light-text);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-color);
+    }
+
+    .product-details {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .product-gallery {
+      position: relative;
+    }
+
+    .main-image {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+
+    .thumbnail-container {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      padding: 1rem 0;
+    }
+
+    .thumbnail {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .thumbnail:hover {
+      transform: scale(1.1);
+    }
+
+    .product-info {
+      padding: 2rem;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+    }
+
+    .product-title {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--primary-color);
+    }
+
+    .product-price {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
+    .stock-status {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      margin-bottom: 1rem;
+    }
+
+    .in-stock {
+      background-color: #4caf50;
+    }
+
+    .low-stock {
+      background-color: #ff9800;
+    }
+
+    .out-of-stock {
+      background-color: #f44336;
+    }
+
+    .product-description {
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .specifications {
+      margin-bottom: 2rem;
+    }
+
+    .specifications h3 {
+      margin-bottom: 1rem;
+    }
+
+    .spec-list {
+      list-style: none;
+    }
+
+    .spec-list li {
+      margin-bottom: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem;
+      background-color: rgba(255, 255, 255, 0.05);
+      border-radius: 5px;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .btn {
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: var(--light-text);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      border: 2px solid var(--primary-color);
+      color: var(--primary-color);
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+    }
+
+    .reviews {
+      margin-top: 2rem;
+    }
+
+    .review-card {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 1rem;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+
+    .review-author {
+      font-weight: bold;
+    }
+
+    .review-date {
+      color: var(--gray-text);
+    }
+
+    .review-rating {
+      color: #ffd700;
+      margin-bottom: 0.5rem;
+    }
+
+    footer {
+      background-color: var(--dark-bg);
+      padding: 2rem;
+      text-align: center;
+      margin-top: 4rem;
+    }
+
+    .social-links {
+      margin-top: 1rem;
+    }
+
+    .social-links a {
+      color: var(--light-text);
+      margin: 0 1rem;
+      font-size: 1.5rem;
+      transition: color 0.3s ease;
+    }
+
+    .social-links a:hover {
+      color: var(--primary-color);
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="home.html" class="logo">Auto Tech-HUB</a>
+    <div class="nav-links">
+      <a href="home.html#products">Products</a>
+      <a href="home-service.html">Services</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <div class="product-details">
+    <div class="product-gallery">
+      <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSVQ6Wq8yxgecC3VA3GfrRJvrCS_4NlDoKk6e75OyOyZWCfqfNQbuICF1MtBUxt9GYCZWbQ5JLWxpdU1J23xDtZlzo-p8JWblJGuQ2cXElJIn66d2bpOLIpBA" alt="Air Filter" class="main-image" id="mainImage">
+      <div class="thumbnail-container">
+        <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSG40r9bo5cW7JV2Wtnx-LbjUBm1k2eGm9e8W_D5GawOFAndWZ12hPim82YTvSqNsf-wmMkW-TaZDKMgOzRiYEoamh5ck1vavDjNK_ToEgKg2FLEQWiEIZvUw" alt="Air Filter - Front View" class="thumbnail">
+        <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRVfnH8S5n_ZeZMircShfTI_DnVRdCdnu9ml9vDr7NeU2W0RSvsXjP603TJyYY0xLBAg9AyOYWRP1tFy38_ZX4i9MCGv3tS_qX9-4Laei_LFIt0W88-1fc1Fw" alt="Air Filter - Side View" class="thumbnail">
+        
+      </div>
+    </div>
+
+    <div class="product-info">
+      <h1 class="product-title">Premium Air Filter</h1>
+      <div class="product-price">₹599</div>
+      <div class="stock-status in-stock">In Stock (30 units)</div>
+      
+      <div class="product-description">
+        <p>Our premium air filter is designed to provide optimal engine performance by ensuring clean air intake. Made with high-quality materials and advanced filtration technology, this air filter helps improve fuel efficiency and engine longevity.</p>
+        <p>Key benefits:</p>
+        <ul>
+          <li>Superior air filtration</li>
+          <li>Improved engine performance</li>
+          <li>Better fuel efficiency</li>
+          <li>Easy installation</li>
+          <li>Long service life</li>
+        </ul>
+      </div>
+
+      <div class="specifications">
+        <h3>Specifications</h3>
+        <ul class="spec-list">
+          <li><span>Brand</span><span>AutoTech Premium</span></li>
+          <li><span>Model</span><span>AT-AF-2024</span></li>
+          <li><span>Compatibility</span><span>Multiple Vehicle Models</span></li>
+          <li><span>Material</span><span>High-Quality Paper & Foam</span></li>
+          <li><span>Filtration Efficiency</span><span>99.5%</span></li>
+          <li><span>Warranty</span><span>1 Year</span></li>
+          <li><span>Country of Origin</span><span>USA</span></li>
+        </ul>
+      </div>
+
+      <div class="action-buttons">
+        <button class="btn btn-primary" id="buyNowBtn">Buy Now</button>
+        <button class="btn btn-secondary" id="addToCartBtn">Add to Cart</button>
+      </div>
+
+      <div class="reviews">
+        <h3>Customer Reviews</h3>
+        <div class="review-card">
+          <div class="review-header">
+            <span class="review-author">James Anderson</span>
+            <span class="review-date">2024-01-17</span>
+          </div>
+          <div class="review-rating">★★★★★</div>
+          <p>Great air filter! Noticeable improvement in engine performance and fuel efficiency. Easy to install and fits perfectly.</p>
+        </div>
+        <div class="review-card">
+          <div class="review-header">
+            <span class="review-author">Lisa Martinez</span>
+            <span class="review-date">2024-01-14</span>
+          </div>
+          <div class="review-rating">★★★★☆</div>
+          <p>Good quality air filter at an affordable price. The filtration seems to be better than the OEM part. Would recommend.</p>
+        </div>
+        <div class="review-card">
+          <div class="review-header">
+            <span class="review-author">Thomas Clark</span>
+            <span class="review-date">2024-01-09</span>
+          </div>
+          <div class="review-rating">★★★★★</div>
+          <p>Excellent air filter. The engine runs smoother and the fuel efficiency has improved. Great value for money.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2024 Auto Tech-HUB. All rights reserved.</p>
+    <div class="social-links">
+      <a href="#"><i class="fab fa-facebook"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const thumbnails = document.querySelectorAll('.thumbnail');
+      const mainImage = document.getElementById('mainImage');
+
+      thumbnails.forEach(thumbnail => {
+        thumbnail.addEventListener('click', () => {
+          mainImage.src = thumbnail.src;
+        });
+      });
+
+      document.getElementById('buyNowBtn').addEventListener('click', () => {
+        const product = {
+          id: 3,
+          name: "Premium Air Filter",
+          price: "₹599",
+          image: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSVQ6Wq8yxgecC3VA3GfrRJvrCS_4NlDoKk6e75OyOyZWCfqfNQbuICF1MtBUxt9GYCZWbQ5JLWxpdU1J23xDtZlzo-p8JWblJGuQ2cXElJIn66d2bpOLIpBA"
+        };
+        
+        localStorage.setItem('cart', JSON.stringify([product]));
+        
+        window.location.href = 'payment.html';
+      });
+
+      document.getElementById('addToCartBtn').addEventListener('click', () => {
+        const product = {
+          id: 3,
+          name: "Premium Air Filter",
+          price: "₹599",
+          image: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSVQ6Wq8yxgecC3VA3GfrRJvrCS_4NlDoKk6e75OyOyZWCfqfNQbuICF1MtBUxt9GYCZWbQ5JLWxpdU1J23xDtZlzo-p8JWblJGuQ2cXElJIn66d2bpOLIpBA"
+        };
+        
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cart.push(product);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        
+        alert('Added to cart!');
+      });
+    });
+  </script>
+</body>
+</html> 

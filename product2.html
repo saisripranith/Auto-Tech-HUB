@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brake Pads Set - Auto Tech-HUB</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #00c6ff;
+      --secondary-color: #2c5364;
+      --dark-bg: #1f1f1f;
+      --light-text: #ffffff;
+      --gray-text: #aaaaaa;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: var(--light-text);
+      overflow-x: hidden;
+    }
+
+    .navbar {
+      background-color: var(--dark-bg);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: var(--light-text);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-color);
+    }
+
+    .product-details {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .product-gallery {
+      position: relative;
+    }
+
+    .main-image {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+
+    .thumbnail-container {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      padding: 1rem 0;
+    }
+
+    .thumbnail {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .thumbnail:hover {
+      transform: scale(1.1);
+    }
+
+    .product-info {
+      padding: 2rem;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+    }
+
+    .product-title {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--primary-color);
+    }
+
+    .product-price {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
+    .stock-status {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      margin-bottom: 1rem;
+    }
+
+    .in-stock {
+      background-color: #4caf50;
+    }
+
+    .low-stock {
+      background-color: #ff9800;
+    }
+
+    .out-of-stock {
+      background-color: #f44336;
+    }
+
+    .product-description {
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .specifications {
+      margin-bottom: 2rem;
+    }
+
+    .specifications h3 {
+      margin-bottom: 1rem;
+    }
+
+    .spec-list {
+      list-style: none;
+    }
+
+    .spec-list li {
+      margin-bottom: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem;
+      background-color: rgba(255, 255, 255, 0.05);
+      border-radius: 5px;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .btn {
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: var(--light-text);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      border: 2px solid var(--primary-color);
+      color: var(--primary-color);
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+    }
+
+    .reviews {
+      margin-top: 2rem;
+    }
+
+    .review-card {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 1rem;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+
+    .review-author {
+      font-weight: bold;
+    }
+
+    .review-date {
+      color: var(--gray-text);
+    }
+
+    .review-rating {
+      color: #ffd700;
+      margin-bottom: 0.5rem;
+    }
+
+    footer {
+      background-color: var(--dark-bg);
+      padding: 2rem;
+      text-align: center;
+      margin-top: 4rem;
+    }
+
+    .social-links {
+      margin-top: 1rem;
+    }
+
+    .social-links a {
+      color: var(--light-text);
+      margin: 0 1rem;
+      font-size: 1.5rem;
+      transition: color 0.3s ease;
+    }
+
+    .social-links a:hover {
+      color: var(--primary-color);
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="home.html" class="logo">Auto Tech-HUB</a>
+    <div class="nav-links">
+      <a href="home.html#products">Products</a>
+      <a href="home-service.html">Services</a>
+      <a href="about.html#about">About</a>
+      <a href="contact.html#contact">Contact</a>
+    </div>
+  </nav>
+
+  <div class="product-details">
+    <div class="product-gallery">
+      <img src="data:image/jpeg;base64,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" alt="Brake Pads Set" class="main-image" id="mainImage">
+      <div class="thumbnail-container">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-f49jze75wobmZTX5wpa_2GMWtr226bJkWA&s" alt="Brake Pads Set - Front View" class="thumbnail">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOERsovJJrI-qoHjNSzvtKFLnDHQaKcBMXiQ&s" alt="Brake Pads Set - Side View" class="thumbnail">
+        
+      </div>
+    </div>
+
+    <div class="product-info">
+      <h1 class="product-title">Premium Brake Pads Set</h1>
+      <div class="product-price">₹599</div>
+      <div class="stock-status in-stock">In Stock (15 units)</div>
+      
+      <div class="product-description">
+        <p>Our premium brake pads set is designed to provide superior stopping power and durability. Made with high-quality materials and advanced friction technology, these brake pads ensure safe and reliable braking performance.</p>
+        <p>Key benefits:</p>
+        <ul>
+          <li>Excellent stopping power</li>
+          <li>Reduced brake noise</li>
+          <li>Longer lifespan</li>
+          <li>Low dust production</li>
+          <li>Compatible with most vehicles</li>
+        </ul>
+      </div>
+
+      <div class="specifications">
+        <h3>Specifications</h3>
+        <ul class="spec-list">
+          <li><span>Brand</span><span>AutoTech Premium</span></li>
+          <li><span>Model</span><span>AT-BP-2024</span></li>
+          <li><span>Type</span><span>Ceramic</span></li>
+          <li><span>Material</span><span>High-Quality Ceramic Compound</span></li>
+          <li><span>Set Contents</span><span>4 Brake Pads</span></li>
+          <li><span>Compatibility</span><span>Multiple Vehicle Models</span></li>
+          <li><span>Warranty</span><span>1 Year</span></li>
+          <li><span>Country of Origin</span><span>USA</span></li>
+        </ul>
+      </div>
+
+      <div class="action-buttons">
+        <button class="btn btn-primary" id="buyNowBtn">Buy Now</button>
+        <button class="btn btn-secondary" id="addToCartBtn">Add to Cart</button>
+      </div>
+
+      <div class="reviews">
+        <h3>Customer Reviews</h3>
+        <div class="review-card">
+          <div class="review-header">
+            <span class="review-author">Michael Brown</span>
+            <span class="review-date">2024-01-18</span>
+          </div>
+          <div class="review-rating">★★★★★</div>
+          <p>Excellent brake pads! My car stops much better now. The quality is top-notch and the price is reasonable.</p>
+        </div>
+        <div class="review-card">
+          <div class="review-header">
+            <span class="review-author">Lisa Anderson</span>
+            <span class="review-date">2024-01-15</span>
+          </div>
+          <div class="review-rating">★★★★☆</div>
+          <p>Good quality brake pads. Easy to install and works well with my vehicle. Would recommend to others.</p>
+        </div>
+        <div class="review-card">
+          <div class="review-header">
+            <span class="review-author">Robert Wilson</span>
+            <span class="review-date">2024-01-10</span>
+          </div>
+          <div class="review-rating">★★★★★</div>
+          <p>Perfect for my car's braking system. Noticeable improvement in stopping power. Great value for money.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2024 Auto Tech-HUB. All rights reserved.</p>
+    <div class="social-links">
+      <a href="#"><i class="fab fa-facebook"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const thumbnails = document.querySelectorAll('.thumbnail');
+      const mainImage = document.getElementById('mainImage');
+
+      thumbnails.forEach(thumbnail => {
+        thumbnail.addEventListener('click', () => {
+          mainImage.src = thumbnail.src;
+        });
+      });
+
+      document.getElementById('buyNowBtn').addEventListener('click', () => {
+        const product = {
+          id: 2,
+          name: "Premium Brake Pads Set",
+          price: "₹599",
+          image: "data:image/jpeg;base64,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"
+        };
+        
+        localStorage.setItem('cart', JSON.stringify([product]));
+        
+        window.location.href = 'payment.html';
+      });
+
+      document.getElementById('addToCartBtn').addEventListener('click', () => {
+        const product = {
+          id: 2,
+          name: "Premium Brake Pads Set",
+          price: "₹599",
+          image: "data:image/jpeg;base64,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"
+        };
+        
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cart.push(product);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        
+        alert('Added to cart!');
+      });
+    });
+  </script>
+</body>
+</html> 

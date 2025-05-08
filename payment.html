@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment - Auto Tech-HUB</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <style>
+    :root {
+      --primary-color: #00c6ff;
+      --secondary-color: #2c5364;
+      --dark-bg: #1f1f1f;
+      --light-text: #ffffff;
+      --gray-text: #aaaaaa;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: var(--light-text);
+      overflow-x: hidden;
+    }
+
+    .navbar {
+      background-color: var(--dark-bg);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: var(--light-text);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-color);
+    }
+
+    .payment-container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .order-summary {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 2rem;
+      border-radius: 10px;
+    }
+
+    .order-summary h2 {
+      margin-bottom: 1rem;
+      color: var(--primary-color);
+    }
+
+    .order-items {
+      margin-bottom: 1rem;
+    }
+
+    .order-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .order-item img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+
+    .order-item-info h3 {
+      margin-bottom: 0.5rem;
+    }
+
+    .order-total {
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 2px solid var(--primary-color);
+    }
+
+    .order-total div {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+
+    .payment-form {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 2rem;
+      border-radius: 10px;
+    }
+
+    .payment-form h2 {
+      margin-bottom: 1rem;
+      color: var(--primary-color);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.8rem;
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 5px;
+      color: var(--light-text);
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary-color);
+    }
+
+    .payment-methods {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .payment-method {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 1rem;
+      border-radius: 5px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .payment-method:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .payment-method.selected {
+      border: 2px solid var(--primary-color);
+    }
+
+    .payment-method i {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .btn {
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      width: 100%;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: var(--light-text);
+    }
+
+    .btn:hover {
+      transform: scale(1.02);
+    }
+
+    footer {
+      background-color: var(--dark-bg);
+      padding: 2rem;
+      text-align: center;
+      margin-top: 4rem;
+    }
+
+    .social-links {
+      margin-top: 1rem;
+    }
+
+    .social-links a {
+      color: var(--light-text);
+      margin: 0 1rem;
+      font-size: 1.5rem;
+      transition: color 0.3s ease;
+    }
+
+    .social-links a:hover {
+      color: var(--primary-color);
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="home.html" class="logo">Auto Tech-HUB</a>
+    <div class="nav-links">
+      <a href="home.html#products">Products</a>
+      <a href="home.html#services">Services</a>
+      <a href="home.html#about">About</a>
+      <a href="home.html#contact">Contact</a>
+    </div>
+  </nav>
+
+  <div class="payment-container">
+    <div class="order-summary">
+      <h2>Order Summary</h2>
+      <div class="order-items" id="orderItems">
+        <!-- Order items will be dynamically added here -->
+      </div>
+      <div class="order-total">
+        <div>
+          <span>Subtotal</span>
+          <span id="subtotal">₹0.00</span>
+        </div>
+        <div>
+          <span>Shipping</span>
+          <span>₹199</span>
+        </div>
+        <div>
+          <span>Tax</span>
+          <span id="tax">₹0.00</span>
+        </div>
+        <div>
+          <span>Total</span>
+          <span id="total">₹0.00</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="payment-form">
+      <h2>Payment Details</h2>
+      <form id="paymentForm">
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" required>
+        </div>
+        <div class="form-group">
+          <label for="address">Delivery Address</label>
+          <textarea id="address" rows="3" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="city">City</label>
+          <input type="text" id="city" required>
+        </div>
+        <div class="form-group">
+          <label for="state">State</label>
+          <input type="text" id="state" required>
+        </div>
+        <div class="form-group">
+          <label for="zipCode">ZIP Code</label>
+          <input type="text" id="zipCode" required>
+        </div>
+
+        <h3>Payment Method</h3>
+        <div class="payment-methods">
+          <div class="payment-method" data-method="credit">
+            <i class="fab fa-cc-visa"></i>
+            <p>Credit Card</p>
+          </div>
+          <div class="payment-method" data-method="paypal">
+            <i class="fab fa-paypal"></i>
+            <p>PayPal</p>
+          </div>
+          <div class="payment-method" data-method="google">
+            <i class="fab fa-google-pay"></i>
+            <p>Google Pay</p>
+          </div>
+        </div>
+
+        <div class="form-group" id="creditCardFields">
+          <label for="cardNumber">Card Number</label>
+          <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;">
+            <div>
+              <label for="expiry">Expiry Date</label>
+              <input type="text" id="expiry" placeholder="MM/YY">
+            </div>
+            <div>
+              <label for="cvv">CVV</label>
+              <input type="text" id="cvv" placeholder="123">
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Complete Payment</button>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2024 Auto Tech-HUB. All rights reserved.</p>
+    <div class="social-links">
+      <a href="#"><i class="fab fa-facebook"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const orderItemsContainer = document.getElementById('orderItems');
+      let subtotal = 0;
+
+      cart.forEach(item => {
+        const orderItem = document.createElement('div');
+        orderItem.className = 'order-item';
+        orderItem.innerHTML = `
+          <img src="${item.image}" alt="${item.name}">
+          <div class="order-item-info">
+            <h3>${item.name}</h3>
+            <p>${item.price}</p>
+          </div>
+        `;
+        orderItemsContainer.appendChild(orderItem);
+        
+      
+        subtotal += parseFloat(item.price.replace('₹', ''));
+      });
+
+      
+      document.getElementById('subtotal').textContent = `₹${subtotal.toFixed(2)}`;
+      const tax = subtotal * 0.18; 
+      document.getElementById('tax').textContent = `₹${tax.toFixed(2)}`;
+      const total = subtotal + tax + 199; 
+      document.getElementById('total').textContent = `₹${total.toFixed(2)}`;
+
+      const paymentMethods = document.querySelectorAll('.payment-method');
+      const creditCardFields = document.getElementById('creditCardFields');
+      
+      paymentMethods.forEach(method => {
+        method.addEventListener('click', () => {
+          paymentMethods.forEach(m => m.classList.remove('selected'));
+          method.classList.add('selected');
+          
+          if (method.dataset.method === 'credit') {
+            creditCardFields.style.display = 'block';
+          } else {
+            creditCardFields.style.display = 'none';
+          }
+        });
+      });
+      function initializeRazorpay(totalAmount) {
+        const options = {
+          key: 'rzp_test_UEzluswwNjx3ai', 
+          amount: totalAmount * 100, 
+          currency: 'INR',
+          name: 'Auto Tech-HUB',
+          description: 'Purchase of Auto Parts',
+          image: 'https://example.com/logo.png', 
+          order_id: '', 
+          handler: function(response) {
+            alert('Payment successful! Payment ID: ' + response.razorpay_payment_id);
+            
+            
+            localStorage.removeItem('cart');
+            window.location.href = 'home.html';
+          },
+          prefill: {
+            name: document.getElementById('fullName').value,
+            email: document.getElementById('email').value,
+            contact: document.getElementById('phone').value
+          },
+          theme: {
+            color: '#00c6ff'
+          }
+        };
+
+        const rzp = new Razorpay(options);
+        rzp.open();
+      }
+
+      const paymentForm = document.getElementById('paymentForm');
+      paymentForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const totalAmount = parseFloat(document.getElementById('total').textContent.replace('₹', ''));
+        
+        initializeRazorpay(totalAmount);
+      });
+
+      window.addEventListener('payment.success', function(e) {
+        console.log('Payment successful', e.detail);
+      });
+
+      window.addEventListener('payment.error', function(e) {
+        console.error('Payment failed', e.detail);
+        alert('Payment failed. Please try again.');
+      });
+    });
+  </script>
+</body>
+</html> 

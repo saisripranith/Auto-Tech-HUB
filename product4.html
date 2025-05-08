@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spark Plugs Set - Auto Tech-HUB</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #00c6ff;
+      --secondary-color: #2c5364;
+      --dark-bg: #1f1f1f;
+      --light-text: #ffffff;
+      --gray-text: #aaaaaa;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: var(--light-text);
+      overflow-x: hidden;
+    }
+
+    .navbar {
+      background-color: var(--dark-bg);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: var(--light-text);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-color);
+    }
+
+    .product-details {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .product-gallery {
+      position: relative;
+    }
+
+    .main-image {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+
+    .thumbnail-container {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      padding: 1rem 0;
+    }
+
+    .thumbnail {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .thumbnail:hover {
+      transform: scale(1.1);
+    }
+
+    .product-info {
+      padding: 2rem;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+    }
+
+    .product-title {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--primary-color);
+    }
+
+    .product-price {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
+    .stock-status {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      margin-bottom: 1rem;
+    }
+
+    .in-stock {
+      background-color: #4caf50;
+    }
+
+    .low-stock {
+      background-color: #ff9800;
+    }
+
+    .out-of-stock {
+      background-color: #f44336;
+    }
+
+    .product-description {
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .specifications {
+      margin-bottom: 2rem;
+    }
+
+    .specifications h3 {
+      margin-bottom: 1rem;
+    }
+
+    .spec-list {
+      list-style: none;
+    }
+
+    .spec-list li {
+      margin-bottom: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem;
+      background-color: rgba(255, 255, 255, 0.05);
+      border-radius: 5px;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .btn {
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: var(--light-text);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      border: 2px solid var(--primary-color);
+      color: var(--primary-color);
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+    }
+
+    .reviews {
+      margin-top: 2rem;
+    }
+
+    .review-card {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 1rem;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+
+    .review-author {
+      font-weight: bold;
+    }
+
+    .review-date {
+      color: var(--gray-text);
+    }
+
+    .review-rating {
+      color: #ffd700;
+      margin-bottom: 0.5rem;
+    }
+
+    footer {
+      background-color: var(--dark-bg);
+      padding: 2rem;
+      text-align: center;
+      margin-top: 4rem;
+    }
+
+    .social-links {
+      margin-top: 1rem;
+    }
+
+    .social-links a {
+      color: var(--light-text);
+      margin: 0 1rem;
+      font-size: 1.5rem;
+      transition: color 0.3s ease;
+    }
+
+    .social-links a:hover {
+      color: var(--primary-color);
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="home.html" class="logo">Auto Tech-HUB</a>
+    <div class="nav-links">
+      <a href="home.html#products">Products</a>
+      <a href="home-service.html">Services</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <div class="product-details">
+    <div class="product-gallery">
+      <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAJQA3gMBIgACEQEDEQH/xAAcAAEAAgMBAQEAAAAAAAAAAAAABgcBBAUDAgj/xAA8EAABAwMCBAQCCAMIAwAAAAABAAIDBAUREiEGMUFREyJhcRSBByMykaGx0eFSwfAVQkNTYnKi8RYzgv/EABgBAQEBAQEAAAAAAAAAAAAAAAABAwQC/8QAHxEBAQEAAgMAAwEAAAAAAAAAAAECAxESMUEEIjIh/9oADAMBAAIRAxEAPwC8HEYO4HqquvH0sQxXd9NaYoZqaI6TJKSPGI56SOQ9d13/AKVLzWWbhYutzSJamUQGTGRG0gkn8MfNfmyqqBHI0RM0ho36oP1BwvxhQcQYiDTT1RGfCc7Id/td1+4FSUHZflGzX2WnmY5khYWkEOacEFW7w/8ASvBK1tPcqZ8jmjBniLRn3aTz9kFpItS3XGluVO2eilEsZ6jp6EdCtrKDKLGUygyiIgIiICIiAiIgIiICIiAiIgIiICIiAiIg1bhQU1xo5qStjbLBK3S9rlSPF30UXOne+W1xCtpubdJHiD/cP0yr4TCD8j26goqC8gX5tQykiDi9kI85eBsMe/Nc+mrzG/ZugOJIx0yV+kPpE4Dh4nibU0PgwXGMEF7m7TN7OI655H3VHTcN3Oy8RQU0tvxWeJpiglGWvedgc8iOufRBJfo6guF5uL2CaohoIQPiXNkLfEPMM9f5c1dEcpb5g5wdjGQd/wB/muBw5aYLFaoaGn30DMsmN5JDu5x9zn2GAulJUMhjdJI4NY0ZcXHAATrsdSS7w0cDpq6RrIm85D0W9TVMVVC2ankZLG7k5hyCqPrrlW8acQR0lA5wo2O8nRob1e5WI2st/B9nGXEAbaebpXrp5Px/CSd/tfjDPN5W35EzRcPhniKK/Uvithkgc04cHbtJ/wBLv6K7i59Zub1W0ss7giIooiIgIiICIiAiIgIiICIiAiIgIiICIiAuJfrPT1dZSXOSMvno9QZvs0OG5x3/AFXbWCMoIrJtyPPqq9+ki+u8tmpXHU/Bn088dG/P+uate420lrpaVoLsE+HyyfTsqa4btFZc+MKqru1PKx9PKZJIpWkHWfsj2HP5BdX4szLd6+MOe2yZn1K+DrXDw7ZHT1RayeRniTPd/cA3xnsPzUXM9VxzxO1jC5tFEdj/AJced3Y7nstj6R724lllpTkuAdOG+/lb/P7lKeCbMyx2cGRuaqQeJMQN8/wj2W81cZvNr+temVz5anHPU9utU1lNYqWmt1AxpqpvLTUwJy/HM5wQPd2BnGSvrhTiOtrpJaS40j2TROIcSQHtHQvZzGd8EZBx05KG/wDkUtyqqG507zS3APFO2RkJkhiZIRoimyRl2dzpxjKm9mpTaKOV9wq2z1M0xkkmLdLQTyaOzRjr6rDkx45/b3WmNW6/z0lDXtdyIX0uBSVk0Mcjq58TGwfbn1jQeX78+W3Pmt63XNlWZGOjcx0biCdi0joQ4bbjfC5uq3dFEWMhRWUREBERAREQEREBERAREQEREBERAREQYPJalZQw1AJc3TJyDwN/3C3FhBUEXBFyg4zkr7sGTUuozRzM+y93JoI6Ebbei3+Ja6J9TBRMqphHBLqrY6UkShmnbB64JBIG+6s5zQ5pa4Ag8wVEuJ+C6e6CSWjcIKggkbZGojGrH8Q6HmPwXTnn8ty8nxheO5z1lHuF6eCte+ondNUQUFQ74KaUFmsEA6nNwA4tPJ2PyXale25VbPBe17RlpBbqaBjc5HP5EHlnORj6r2yRUngDOjT4cr3sLi1uNyWgg/cvNhm+AfIS+eWVrdeHaXFo7Fo54J6Z39l51vzvk95njOm0alrnMoaWAyQsw14wR/8AWodNufuF16KEUtOyMY1Y87gANR6rkWkfUMmeG63DLTtnSQOZGxPqAFvT1sdLTvmmeGMjGpzjyACz1fke5HrdrrLbqGWWniE8wH1cTnYy7pkrn01zvEPwxrJ4J5ZcmWOKHTHE3HQ5zzwN85z0UCi4mmu1bUXqsmFPaqQkQQat3H+N/r2Hqu5wjxlZ7+w0/imKrJJ0SbFw6Y7rwqe01wD8B459Qt9rg4ZBBHcKMPa+EB5OWZG/Qr2oLuY5JBLBL4YJ+sGC1oBxuoJEi131lPGyN0k8bWyEBji4Ydnlhe4PJUZREQEREBERAREQEREBERAREQEREBERBrVVJHUjzjDsbOHMKMXC0VDLgJpiXwFpDZI3FpZsNsdOR39fRTBYcMjCsvSdIqPqmaQAGt2AHIKN8S8V2q0S+Bd4zNF4Rf4Q5Pd/dB9Njn2Up4u02ay1dzgZqdCzIh6OcTgAdtyqp40t8cUT7ld2GeaBussjBwXYwAR0YDjn2UtV72mOw2isiiur2PqrlAHmJ7cRw6jszJ21Yx6jJWnxJ9Hhya/huUnSdXgk7t6+Q/yUYoOJIqqH4O/wtnicMCYDl6kfzUktNdc7EGSW6oFfbHfZie7zM7BruozgYPJQdfgC/Xmst9yobjWiGWm0RxGaP6xxPNv5YPqpbUVtVaqhtHVU58PwxI2THlc7qPvIVbU3FE1XeqiqrY4W0lMzzzNBaPEOw0987gdcb9V3oeI3XKSndUv8WOlyIS8+YnqSgnVFaHw2xvjyePLKTJoeANOTnSB7lfdNcamzywQv8SaGZ2hkJ3e0+hPTvnkFr229R1LGsqMdwc7hadTeGx3Gnrp43NpZS6IOcCTHEM5Pq5x39APRUTujm+IgZLocwkfZdzC91r0k8E0Q+He1zQB9k5wthAREQEREBERAREQEREBERAREQEREBERBqXWhjudvnopi5rJmFpc3m3sR6g7qu6w19srKh1QI62MnRIRHpBx2G+B6Kz1o3C3QVjfO0Nfy1t5/PugpG/8AAtvvTHVnDT2U1VzdSu2a4+nY/go/b7HcbZb5QzLqqbYQl3kG+PYknbPv2Vwz8I1PxhdTfVub5g9jsB36LhzvjhoxLUt+GkbGC9kmzo3HYj5HbZQQq1XWjs94DbhCa0QNc5ztO0lSebz3DRkAfouA25uNZJM1uhr3lwYOTR2U8quEJZaT4rS3W/JazG7WqI11kdA/zYjYDjU7oqO1Z7m+fwaZ83hNncWl+eeBnSPUqWXVtRWQUdVRzNqoaUNzTsGNDi7G569Bn0Vf3Gtp5vAfQxmGjp4jBR69nEZ+snd/qccgdh7bfFpv81JJE7Lmh7tUWOjR1I7bfmoLCsl9lgeJqactwS+Vjjhkj+WO/M/j6KdWjiOnqh4VT9TO1uX69g455N78x96rOlraC9QsfLIKasLXltUPsuOdQ8o5Hcj3K9nyVFukENwY4skkyx7XZdJluQQeg3+WQguMH0WVArJxNNTNaKhzqmHTreWnU8OdyBJPL9VMqK4U9bHqp5GvIALg050kjOFRtogRAREQEREBERAREQEREBERAREQEREGMLl3+girqZjZKaOXS7cuZkhuN/v2XVRBF3hmMPwNI7dFA+Ircb+6RtLC4wOB/wDW06nRg+Z2OmeQ9N1Zt/tJuFtqYaYiOeRhAOcA99+mRkfNLJaW0NM4yxtE0ow8A5DW9Gj0QUPWW34tmpjQ2Jo0Ma0bBoG33DGPkuJVW+Vj3eJkCQYc4HZkY/6+73V+X3gynqh41ua2CYBrGRtw2MjO5d1JwTvzVfXO1S08vhVkDoyXEB+nyvwcZaeu+P8AiOhUERpQ+WVoo/qpqmTRFA8+SKBo8znH7/8AkpHY+JHMDIpQ51NM/wAsUm3iNbtlp5jnj/pceutLgZNDtHiDTI4dGfwj0/MD1Ws6R0rjHLFpqZmNp6cnYU0AO5268/XcoqaspGSxfEWGQuDYwXUZ8ujD+errsfyWxb7w6GqcfEdFIyR2sEkMe5u4Gnr+4URgqJIT4tK6SSmkmNPSObtJI0fafjt6/opDHdaO8lslyI8bxC2OuYM6ctwctbz3AOfZBYlo4phmYI64mKRrNTpXY0uPQNA91Jgcqj5Jai2xtbLmWlc2PTKDkyE7H25dcclILFxfJSOJllMsIe50zebi7lgOJ/rCItFFq22uhr6Rk8LgcjDgD9l3UH1C2lQREQEREBERAREQEREBERAREQEREBERAWjc7ZTXKB8dTG1xcxzA4jJbnst5EFZ3/hKqoi51E19TA5+I4/tS8s56dQfw6BQyotkczZCSMu8r++O37fqr+IB5qN33hSlrfrqQCCpawNj0+VudWSXd+ZUFImKsoZS+AaZXsMMef8GM8yOxxnf3X3FJDIwOtrSx4bHSUMGN5nk+eQ9h+3ZSy72aaje6GshLWElrZdJDZMc8Z/r5qN1dtkil8SnJbMPLGR/hjr7f9or7hu8tCJo4JGmNr/ADg0OZM8HJ0/Mfl3TwIn1DXUkZYyly91OCSHPONI1Hnvt8iuf8Z4EULHQFzKaN0VFGG7ukcd5CP66BbtwP9k08Vvgl8R8bQ6aQ/wCZjcD25fegsq0tr7ZRwyxSgvLAZW82l3UYUrs93guLS0EMqGbSRE7j1Hoqj4Z4sqY5W01Q10gI/BTp9so7w3+0uHan4etbu+Iuxv6jmCe/IqomgKyozY+IZDN8BeGGCrZtl4xq9/1GxUlG6DKIiAiIgIiICIiAiIgIiICIiAiIgIiICxhZRBrVtFT1kZjniY8FpaC4ZxkYUEvnBk0ALrY3xYctY2F5Jd6nPb02CsRCgpigsodUCqcxzXREsjEg3DhzcfY5+fyXneOGgWeJTku75Vv1lupquLRLE0dnNGC32K5lBw98PU655WyRN+w0DGfdBWtn4bloqQ1MrT4sw5dWjsupZXtorxSyzSugb4uHOzzHb1yrIq7dBUjJbpf3C5tbwna66BkdVE5xaclwOCf2QeHHcEAsctxc5sc1Jh7H/wAW+NPzz9+F0eGax1baIZH5L2+Uk9e34EKO8TWarr5KW2l1RJSMb5c4IkcerjjkBsFLLXRsoKGOmYc6Bue56oNtERAREQEREBERAREQEREBERAREQEREBERAREQEREBERBhZREH/9k=" alt="Spark Plugs Set" class="main-image" id="mainImage">
+      <div class="thumbnail-container">
+        <img src="data:image/jpeg;base64,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" alt="Spark Plugs Set - Front View" class="thumbnail">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLbBlqYtC4IqGgjTCZdoyYiUio8m6qmneGuA&s" alt="Spark Plugs Set - Side View" class="thumbnail">
+        
+      </div>
+    </div>
+
+    <div class="product-info">
+      <h1 class="product-title">Premium Spark Plugs Set (4 Pack)</h1>
+      <div class="product-price">₹699</div>
+      <div class="stock-status in-stock">In Stock (20 units)</div>
+      
+      <div class="product-description">
+        <p>Our premium spark plugs set is designed to provide optimal ignition performance and fuel efficiency. Made with high-quality materials and advanced technology, these spark plugs ensure reliable engine performance and longevity.</p>
+        <p>Key benefits:</p>
+        <ul>
+          <li>Improved fuel efficiency</li>
+          <li>Better engine performance</li>
+          <li>Longer lifespan</li>
+          <li>Reduced emissions</li>
+          <li>Compatible with most vehicles</li>
+        </ul>
+      </div>
+
+      <div class="specifications">
+        <h3>Specifications</h3>
+        <ul class="spec-list">
+          <li><span>Brand</span><span>AutoTech Premium</span></li>
+          <li><span>Model</span><span>AT-SP-2024</span></li>
+          <li><span>Type</span><span>Iridium</span></li>
+          <li><span>Material</span><span>Iridium Tip, Nickel Alloy</span></li>
+          <li><span>Set Contents</span><span>4 Spark Plugs</span></li>
+          <li><span>Heat Range</span><span>Standard</span></li>
+          <li><span>Compatibility</span><span>Multiple Vehicle Models</span></li>
+          <li><span>Warranty</span><span>1 Year</span></li>
+          <li><span>Country of Origin</span><span>USA</span></li>
+        </ul>
+      </div>
+
+      <div class="action-buttons">
+        <button class="btn btn-primary" id="buyNowBtn">Buy Now</button>
+        <button class="btn btn-secondary" id="addToCartBtn">Add to Cart</button>
+      </div>
+
+      <div class="reviews">
+        <h3>Customer Reviews</h3>
+        <div class="review-card">
+          <div class="review-header">
+            <span class="review-author">James Wilson</span>
+            <span class="review-date">2024-01-18</span>
+          </div>
+          <div class="review-rating">★★★★★</div>
+          <p>Excellent spark plugs! My engine runs much smoother now. The quality is top-notch and the price is reasonable.</p>
+        </div>
+        <div class="review-card">
+          <div class="review-header">
+            <span class="review-author">Sarah Thompson</span>
+            <span class="review-date">2024-01-15</span>
+          </div>
+          <div class="review-rating">★★★★☆</div>
+          <p>Good quality spark plugs. Easy to install and works well with my vehicle. Would recommend to others.</p>
+        </div>
+        <div class="review-card">
+          <div class="review-header">
+            <span class="review-author">David Miller</span>
+            <span class="review-date">2024-01-10</span>
+          </div>
+          <div class="review-rating">★★★★★</div>
+          <p>Perfect for my car's engine. Noticeable improvement in performance and fuel efficiency. Great value for money.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2024 Auto Tech-HUB. All rights reserved.</p>
+    <div class="social-links">
+      <a href="#"><i class="fab fa-facebook"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const thumbnails = document.querySelectorAll('.thumbnail');
+      const mainImage = document.getElementById('mainImage');
+
+      thumbnails.forEach(thumbnail => {
+        thumbnail.addEventListener('click', () => {
+          mainImage.src = thumbnail.src;
+        });
+      });
+
+      document.getElementById('buyNowBtn').addEventListener('click', () => {
+        const product = {
+          id: 4,
+          name: "Premium Spark Plugs (Set of 4)",
+          price: "₹699",
+          image: "data:image/jpeg;base64,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"
+        };
+        
+        localStorage.setItem('cart', JSON.stringify([product]));
+        
+        window.location.href = 'payment.html';
+      });
+
+      document.getElementById('addToCartBtn').addEventListener('click', () => {
+        const product = {
+          id: 4,
+          name: "Premium Spark Plugs (Set of 4)",
+          price: "₹699",
+          image: "data:image/jpeg;base64,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"
+        };
+        
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cart.push(product);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        
+        alert('Added to cart!');
+      });
+    });
+  </script>
+</body>
+</html> 

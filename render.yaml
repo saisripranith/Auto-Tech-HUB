@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: autotech-hub
+    runtime: node
+    buildCommand: npm install
+    startCommand: npm start
+    rootDir: .
+    envVars:
+      - key: PORT
+        value: 3000
+      - key: RAZORPAY_KEY_ID
+        value: rzp_test_maJx76beM9pPzk
+      - key: RAZORPAY_KEY_SECRET
+        value: nMt5oByuD7ebNWlByhnuMudI
+    healthCheckPath: /
+    autoDeploy: true
+    plan: free 
